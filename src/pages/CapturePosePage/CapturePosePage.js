@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button, Input, Label } from "reactstrap";
+import "@tensorflow/tfjs";
 import * as posenet from "@tensorflow-models/posenet";
 import Layout from "../../components/Layout/Layout";
 import {
@@ -13,7 +14,17 @@ import moment from "moment";
 import beep from "../../assets/sounds/beep.wav";
 import styles from "./CapturePosePage.module.css";
 
-class NewRecordingPage extends Component {
+// The legacy positional API scaled 640x480 by 0.5, then rounded each dimension
+// down to outputStride-aligned values: 305x225 for stride 16.
+export const POSE_NET_MODEL_CONFIG = Object.freeze({
+  architecture: "MobileNetV1",
+  outputStride: 16,
+  inputResolution: Object.freeze({ width: 305, height: 225 }),
+  multiplier: 0.75,
+  quantBytes: 4
+});
+
+export class NewRecordingPage extends Component {
   constructor(props) {
     super(props);
     this.videoRef = React.createRef();
@@ -97,7 +108,7 @@ class NewRecordingPage extends Component {
     this.canvasRef.current.width = this.state.width;
     this.canvasRef.current.height = this.state.height;
     if (!this.net) {
-      this.net = await posenet.load(0.75);
+      this.net = await posenet.load(POSE_NET_MODEL_CONFIG);
     }
 
     ctx.clearRect(0, 0, this.state.width, this.state.height);
@@ -105,12 +116,9 @@ class NewRecordingPage extends Component {
     ctx.drawImage(img, 0, 0);
     ctx.restore();
 
-    const pose = await this.net.estimateSinglePose(
-      this.canvasRef.current,
-      this.state.poseNet.imageScaleFactor,
-      this.state.poseNet.flipHorizontal,
-      this.state.poseNet.outputStride
-    );
+    const pose = await this.net.estimateSinglePose(this.canvasRef.current, {
+      flipHorizontal: this.state.poseNet.flipHorizontal
+    });
 
     const poseData = processPose(pose);
 
