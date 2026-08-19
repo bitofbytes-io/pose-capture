@@ -20,10 +20,13 @@ after it has been extracted, along with the screenshots.
 
 To run the Pose Capture Tool
 
-1. Install the NPM packages inside the main directory using ``` npm install ```
-2. Install the server NPM packages
-3. Changing into the /server directory then using ``` npm install ```
-4. Change back to the main repo directory and run using ``` npm start ```
+1. Install the client packages in the repository root with `npm ci`.
+2. Install the server packages with `cd server && npm ci`.
+3. Return to the repository root and run the client and server with `npm start`.
+
+The client is available on port 3010 and the server on port 3015. To run only
+the client, use `npm run client`. To create or preview a production build, use
+`npm run build` or `npm run preview`.
 
 To run the Pose Debugging Tool
 
@@ -44,7 +47,8 @@ is useful when debugging the punch type.
 All needed NPM packages are included in the package.json file. 
 
 ## Prerequisites
-All needed NPM packages are included in the package.json file.
+Node.js `^20.19.0` or `>=22.12.0` and npm are required. All application
+packages are declared in the client and server `package.json` files.
 
 ## Built With
 [React](https://reactjs.org/)
