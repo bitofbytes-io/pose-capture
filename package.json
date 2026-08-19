@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@tensorflow-models/posenet": "2.2.2",
-    "@tensorflow/tfjs": "4.22.0",
+    "@tensorflow/tfjs": "3.21.0",
     "body-parser": "^1.20.6",
     "bootstrap": "^4.3.1",
     "moment": "^2.29.4",
