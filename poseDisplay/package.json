@@ -14,5 +14,19 @@
   "devDependencies": {
     "concurrently": "^4.1.0",
     "live-server": "^1.2.1"
+  },
+  "overrides": {
+    "chokidar": {
+      "braces": "3.0.3"
+    },
+    "live-server": {
+      "http-auth": "4.2.1"
+    },
+    "micromatch": {
+      "braces": "3.0.3"
+    },
+    "yargs": {
+      "yargs-parser": "13.1.2"
+    }
   }
 }
