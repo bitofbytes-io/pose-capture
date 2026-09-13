@@ -31,8 +31,11 @@ the client, use `npm run client`. To create or preview a production build, use
 To run the Pose Debugging Tool
 
 1. Ensure the server NPM packages have already been installed, see above for installation.
-2. Change into the poseDisplay directory and install those NPM packages using ``` npm install ```
-3. Start the liveServer using ``` npm start ```
+2. Change into the `poseDisplay` directory and install its packages with `npm ci`.
+3. Run `npm start` to start both the display client and the server.
+
+Vite serves and opens the display client at http://localhost:8080. If only the
+display client is desired, run `npm run client` instead.
 
 Once all poses have been captured and tagged, you can export all pose data into one large
 array for use in the frontend application by:
