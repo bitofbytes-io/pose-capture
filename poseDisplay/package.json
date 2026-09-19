@@ -8,7 +8,7 @@
   },
   "scripts": {
     "client": "vite --port 8080 --open",
-    "server": "cd ..\\server && npm start",
+    "server": "cd ../server && npm start",
     "start": "concurrently \"npm run client\" \"npm run server\" "
   },
   "keywords": [],
